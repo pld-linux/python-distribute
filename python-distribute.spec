@@ -9,7 +9,7 @@ License:	PSF or ZPL
 Group:		Development/Languages/Python
 Source0:	http://pypi.python.org/packages/source/d/distribute/distribute-%{version}.tar.gz
 # Source0-md5:	3940fd02a763f001014296cfec5e69f2
-URL:		http://www.argo.es/~jcea/programacion/pybsddb.htm
+URL:		http://pypi.python.org/pypi/distribute
 BuildRequires:  python
 BuildRequires:	python-modules
 BuildRequires:	python-devel
