@@ -2,7 +2,7 @@
 #
 %define		pname	distribute
 Summary:	Easily download, build, install, upgrade, and uninstall Python packages
-Name:		python-distibute
+Name:		python-distribute
 Version:	0.6.3
 Release:	0.1
 License:	PSF or ZPL
@@ -15,7 +15,7 @@ BuildRequires:	python-modules
 BuildRequires:	python-devel
 BuildRequires:	rpm-build-macros >= 1.523
 Provides:	python-setuptools = 1:0.6-3
-Obsoletes:	pyhton-setuptools
+Obsoletes:	python-setuptools
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
