@@ -3,12 +3,12 @@
 %define		pname	distribute
 Summary:	Easily download, build, install, upgrade, and uninstall Python packages
 Name:		python-distribute
-Version:	0.6.4
+Version:	0.6.6
 Release:	1
 License:	PSF or ZPL
 Group:		Development/Languages/Python
 Source0:	http://pypi.python.org/packages/source/d/distribute/distribute-%{version}.tar.gz
-# Source0-md5:	7a963679fddc64a0e363b2ccf8024952
+# Source0-md5:	a0a7541a8169d73842e4bb88d79cf8d3
 URL:		http://pypi.python.org/pypi/distribute
 BuildRequires:  python
 BuildRequires:	python-modules
