@@ -10,10 +10,11 @@ Group:		Development/Languages/Python
 Source0:	http://pypi.python.org/packages/source/d/distribute/distribute-%{version}.tar.gz
 # Source0-md5:	5b1a2fde063a361aa241f98e0f9e1931
 URL:		http://pypi.python.org/pypi/distribute
-BuildRequires:  python
-BuildRequires:	python-modules
+BuildRequires:	python
 BuildRequires:	python-devel
+BuildRequires:	python-modules
 BuildRequires:	rpm-build-macros >= 1.523
+BuildRequires:	rpm-pythonprov
 Provides:	python-setuptools = 1:0.6-3
 Obsoletes:	python-setuptools
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -21,9 +22,9 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %description
 Distribute is a fork of the Setuptools project.
 
-Distribute is intended to replace Setuptools as the standard method for working
-with Python module distributions.
- 
+Distribute is intended to replace Setuptools as the standard method
+for working with Python module distributions.
+
 %prep
 %setup -q -n %{pname}-%{version}
 
