@@ -23,8 +23,8 @@ BuildRequires:	python3-2to3 >= 1:3.1.1-3
 BuildRequires:	python3-devel
 BuildRequires:	python3-modules
 %endif
-BuildRequires:	rpm-build-macros >= 1.523
 BuildRequires:	rpm-pythonprov
+BuildRequires:	rpmbuild(macros) >= 1.523
 Provides:	python-setuptools = 1:0.6-3
 Obsoletes:	python-setuptools
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
