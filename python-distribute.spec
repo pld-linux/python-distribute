@@ -1,7 +1,13 @@
-%bcond_with	tests	# enble tests
-%bcond_without	python2
-%bcond_without	python3
 #
+# Conditional build:
+%bcond_with		tests	# perform "make test"
+%bcond_without	python2
+%if "%{pld_release}" == "ac"
+%bcond_with		python3
+%else
+%bcond_without	python3
+%endif
+
 %define		pname	distribute
 Summary:	Easily download, build, install, upgrade, and uninstall Python packages
 Name:		python-distribute
@@ -23,6 +29,7 @@ BuildRequires:	python3-2to3 >= 1:3.1.1-3
 BuildRequires:	python3-devel
 BuildRequires:	python3-modules
 %endif
+BuildRequires:	rpm >= 4.4.9-56
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.523
 Provides:	python-setuptools = 1:0.6-3
