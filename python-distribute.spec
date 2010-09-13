@@ -12,7 +12,7 @@
 Summary:	Easily download, build, install, upgrade, and uninstall Python packages
 Name:		python-distribute
 Version:	0.6.10
-Release:	6
+Release:	7
 License:	PSF or ZPL
 Group:		Development/Languages/Python
 Source0:	http://pypi.python.org/packages/source/d/distribute/distribute-%{version}.tar.gz
