@@ -12,7 +12,7 @@
 Summary:	Easily download, build, install, upgrade, and uninstall Python packages
 Name:		python-distribute
 Version:	0.6.14
-Release:	2
+Release:	3
 License:	PSF or ZPL
 Group:		Development/Languages/Python
 Source0:	http://pypi.python.org/packages/source/d/distribute/distribute-%{version}.tar.gz
@@ -90,6 +90,10 @@ rm $RPM_BUILD_ROOT%{py_sitescriptdir}/setuptools/*.exe
 rm -rf $RPM_BUILD_ROOT%{py_sitescriptdir}/setuptools/tests
 # reinstall site.py deleted by py_postclean
 cp build-2/lib/site.py $RPM_BUILD_ROOT%{py_sitescriptdir}/site.py
+
+# rename to avoid rpm dir-to-file conflict from upgrade from python-setuptools
+egg=$(basename $RPM_BUILD_ROOT%{py_sitescriptdir}/setuptools-*.egg-info)
+mv $RPM_BUILD_ROOT%{py_sitescriptdir}/$egg $RPM_BUILD_ROOT%{py_sitescriptdir}/S${egg#?}
 %endif
 
 %if %{with python3}
@@ -115,7 +119,8 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/easy_install-2.*
-%{py_sitescriptdir}/*.egg-info
+%{py_sitescriptdir}/distribute-%{version}-py*.egg-info
+%{py_sitescriptdir}/Setuptools-*.egg-info
 %dir %{py_sitescriptdir}/setuptools
 %dir %{py_sitescriptdir}/setuptools/command
 %{py_sitescriptdir}/pkg_resources.py[co]
@@ -131,7 +136,8 @@ rm -rf $RPM_BUILD_ROOT
 %files -n python3-%{pname}
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/easy_install-3.*
-%{py3_sitescriptdir}/*.egg-info
+%{py3_sitescriptdir}/distribute-%{version}-py*.egg-info
+%{py3_sitescriptdir}/setuptools-*.egg-info
 %dir %{py3_sitescriptdir}/setuptools
 %dir %{py3_sitescriptdir}/setuptools/command
 %{py3_sitescriptdir}/pkg_resources.py[co]
