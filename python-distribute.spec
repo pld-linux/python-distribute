@@ -104,7 +104,9 @@ mv $RPM_BUILD_ROOT%{py_sitescriptdir}/$egg $RPM_BUILD_ROOT%{py_sitescriptdir}/S$
 	--optimize=2
 
 # shutup check-files
+%if "%{py3_ver}" < "3.2"
 %py3_postclean
+%endif
 rm $RPM_BUILD_ROOT%{_bindir}/easy_install
 rm $RPM_BUILD_ROOT%{py3_sitescriptdir}/setuptools/*.exe
 rm -rf $RPM_BUILD_ROOT%{py3_sitescriptdir}/setuptools/tests
@@ -123,11 +125,11 @@ rm -rf $RPM_BUILD_ROOT
 %{py_sitescriptdir}/Setuptools-*.egg-info
 %dir %{py_sitescriptdir}/setuptools
 %dir %{py_sitescriptdir}/setuptools/command
+%{py_sitescriptdir}/site.py
+%{py_sitescriptdir}/setuptools.pth
 %{py_sitescriptdir}/pkg_resources.py[co]
 %{py_sitescriptdir}/easy_install.py[co]
-%{py_sitescriptdir}/site.py
 %{py_sitescriptdir}/site.py[co]
-%{py_sitescriptdir}/setuptools.pth
 %{py_sitescriptdir}/setuptools/*.py[co]
 %{py_sitescriptdir}/setuptools/command/*.py[co]
 %endif
@@ -140,11 +142,26 @@ rm -rf $RPM_BUILD_ROOT
 %{py3_sitescriptdir}/setuptools-*.egg-info
 %dir %{py3_sitescriptdir}/setuptools
 %dir %{py3_sitescriptdir}/setuptools/command
+%{py3_sitescriptdir}/site.py
+%{py3_sitescriptdir}/setuptools.pth
+%if "%{py3_ver}" < "3.2"
 %{py3_sitescriptdir}/pkg_resources.py[co]
 %{py3_sitescriptdir}/easy_install.py[co]
-%{py3_sitescriptdir}/site.py
 %{py3_sitescriptdir}/site.py[co]
-%{py3_sitescriptdir}/setuptools.pth
 %{py3_sitescriptdir}/setuptools/*.py[co]
 %{py3_sitescriptdir}/setuptools/command/*.py[co]
+%else
+%dir %{py3_sitescriptdir}/__pycache__
+%{py3_sitescriptdir}/pkg_resources.py
+%{py3_sitescriptdir}/__pycache__/pkg_resources.*.py[co]
+%{py3_sitescriptdir}/easy_install.py
+%{py3_sitescriptdir}/__pycache__/easy_install.*.py[co]
+%{py3_sitescriptdir}/__pycache__/site.*.py[co]
+%dir %{py3_sitescriptdir}/setuptools/__pycache__
+%{py3_sitescriptdir}/setuptools/*.py
+%{py3_sitescriptdir}/setuptools/__pycache__/*.py[co]
+%dir %{py3_sitescriptdir}/setuptools/command/__pycache__
+%{py3_sitescriptdir}/setuptools/command/*.py
+%{py3_sitescriptdir}/setuptools/command/__py[co]ache__/*.py[co]
+%endif
 %endif
