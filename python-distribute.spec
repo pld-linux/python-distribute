@@ -103,15 +103,9 @@ mv $RPM_BUILD_ROOT%{py_sitescriptdir}/$egg $RPM_BUILD_ROOT%{py_sitescriptdir}/S$
 	--root=$RPM_BUILD_ROOT \
 	--optimize=2
 
-# shutup check-files
-%if "%{py3_ver}" < "3.2"
-%py3_postclean
-%endif
 rm $RPM_BUILD_ROOT%{_bindir}/easy_install
 rm $RPM_BUILD_ROOT%{py3_sitescriptdir}/setuptools/*.exe
 rm -rf $RPM_BUILD_ROOT%{py3_sitescriptdir}/setuptools/tests
-# reinstall site.py deleted by py3_postclean
-cp build-3/lib/site.py $RPM_BUILD_ROOT%{py3_sitescriptdir}/site.py
 %endif
 
 %clean
@@ -144,13 +138,6 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{py3_sitescriptdir}/setuptools/command
 %{py3_sitescriptdir}/site.py
 %{py3_sitescriptdir}/setuptools.pth
-%if "%{py3_ver}" < "3.2"
-%{py3_sitescriptdir}/pkg_resources.py[co]
-%{py3_sitescriptdir}/easy_install.py[co]
-%{py3_sitescriptdir}/site.py[co]
-%{py3_sitescriptdir}/setuptools/*.py[co]
-%{py3_sitescriptdir}/setuptools/command/*.py[co]
-%else
 %dir %{py3_sitescriptdir}/__pycache__
 %{py3_sitescriptdir}/pkg_resources.py
 %{py3_sitescriptdir}/__pycache__/pkg_resources.*.py[co]
@@ -163,5 +150,4 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{py3_sitescriptdir}/setuptools/command/__pycache__
 %{py3_sitescriptdir}/setuptools/command/*.py
 %{py3_sitescriptdir}/setuptools/command/__py[co]ache__/*.py[co]
-%endif
 %endif
