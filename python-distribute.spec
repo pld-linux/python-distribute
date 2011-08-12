@@ -1,13 +1,13 @@
 #
 # Conditional build:
-%bcond_with		tests	# perform "make test"
-%bcond_without	python2
+%bcond_with	tests	# perform "make test"
+%bcond_without	python2	# CPython 2.x module
 %if "%{pld_release}" == "ac"
-%bcond_with	python3
-%bcond_without	pypy
+%bcond_with	python3	# CPython 3.x module
+%bcond_without	pypy	# PyPy module
 %else
-%bcond_without	python3
-%bcond_without	pypy
+%bcond_without	python3	# CPython 3.x module
+%bcond_without	pypy	# PyPy module
 %endif
 
 %define	__pypy	/usr/bin/pypy
@@ -18,6 +18,7 @@
 
 %define		pname	distribute
 Summary:	Easily download, build, install, upgrade, and uninstall Python packages
+Summary(pl.UTF-8):	Łatwe ściąganie, budowanie, instalowanie, uaktualnianie i usuwanie pakietów Pythona
 Name:		python-distribute
 Version:	0.6.19
 Release:	3
@@ -53,8 +54,15 @@ Distribute is a fork of the Setuptools project.
 Distribute is intended to replace Setuptools as the standard method
 for working with Python module distributions.
 
+%description -l pl.UTF-8
+Distribute to odgałęzienie (fork) projektu Setuptools.
+
+Distribute ma na celu zastąpienie Setuptools jako standardowej metody
+pracy z dystrybucjami modułów Pythona.
+
 %package -n python3-%{pname}
-Summary:	Easily download, build, install, upgrade, and uninstall Python packages
+Summary:	Easily download, build, install, upgrade, and uninstall Python 3.x packages
+Summary(pl.UTF-8):	Łatwe ściąganie, budowanie, instalowanie, uaktualnianie i usuwanie pakietów Pythona 3.x
 Group:		Development/Languages/Python
 
 %description -n python3-%{pname}
@@ -63,8 +71,15 @@ Distribute is a fork of the Setuptools project.
 Distribute is intended to replace Setuptools as the standard method
 for working with Python module distributions.
 
+%description -n python3-%{pname} -l pl.UTF-8
+Distribute to odgałęzienie (fork) projektu Setuptools.
+
+Distribute ma na celu zastąpienie Setuptools jako standardowej metody
+pracy z dystrybucjami modułów Pythona.
+
 %package -n pypy-%{pname}
-Summary:	Easily download, build, install, upgrade, and uninstall Python packages
+Summary:	Easily download, build, install, upgrade, and uninstall Python PyPy packages
+Summary(pl.UTF-8):	Łatwe ściąganie, budowanie, instalowanie, uaktualnianie i usuwanie pakietów Pythona PyPy
 Group:		Development/Languages/Python
 
 %description -n pypy-%{pname}
@@ -72,6 +87,12 @@ Distribute is a fork of the Setuptools project.
 
 Distribute is intended to replace Setuptools as the standard method
 for working with Python module distributions.
+
+%description -n pypy-%{pname} -l pl.UTF-8
+Distribute to odgałęzienie (fork) projektu Setuptools.
+
+Distribute ma na celu zastąpienie Setuptools jako standardowej metody
+pracy z dystrybucjami modułów Pythona.
 
 %prep
 %setup -q -n %{pname}-%{version}
@@ -104,7 +125,6 @@ for working with Python module distributions.
 %endif
 %endif
 
-
 %install
 rm -rf $RPM_BUILD_ROOT
 
@@ -117,9 +137,9 @@ rm -rf $RPM_BUILD_ROOT
 
 # shutup check-files
 %py_postclean
-rm $RPM_BUILD_ROOT%{_bindir}/easy_install
-rm $RPM_BUILD_ROOT%{py_sitescriptdir}/setuptools/*.exe
-rm -rf $RPM_BUILD_ROOT%{py_sitescriptdir}/setuptools/tests
+%{__rm} $RPM_BUILD_ROOT%{_bindir}/easy_install
+%{__rm} $RPM_BUILD_ROOT%{py_sitescriptdir}/setuptools/*.exe
+%{__rm} -r $RPM_BUILD_ROOT%{py_sitescriptdir}/setuptools/tests
 # reinstall site.py deleted by py_postclean
 cp build-2/lib/site.py $RPM_BUILD_ROOT%{py_sitescriptdir}/site.py
 
@@ -135,9 +155,9 @@ mv $RPM_BUILD_ROOT%{py_sitescriptdir}/$egg $RPM_BUILD_ROOT%{py_sitescriptdir}/S$
 	--root=$RPM_BUILD_ROOT \
 	--optimize=2
 
-rm $RPM_BUILD_ROOT%{_bindir}/easy_install
-rm $RPM_BUILD_ROOT%{py3_sitescriptdir}/setuptools/*.exe
-rm -rf $RPM_BUILD_ROOT%{py3_sitescriptdir}/setuptools/tests
+%{__rm} $RPM_BUILD_ROOT%{_bindir}/easy_install
+%{__rm} $RPM_BUILD_ROOT%{py3_sitescriptdir}/setuptools/*.exe
+%{__rm} -r $RPM_BUILD_ROOT%{py3_sitescriptdir}/setuptools/tests
 %endif
 
 %if %{with pypy}
@@ -147,10 +167,10 @@ rm -rf $RPM_BUILD_ROOT%{py3_sitescriptdir}/setuptools/tests
 	--root=$RPM_BUILD_ROOT \
 	--optimize=1
 
-rm $RPM_BUILD_ROOT%{pypy_sitedir}/setuptools/*.exe
-rm -rf $RPM_BUILD_ROOT%{pypy_sitedir}/setuptools/tests
+%{__rm} $RPM_BUILD_ROOT%{pypy_libdir}/bin/easy_install*
+%{__rm} $RPM_BUILD_ROOT%{pypy_sitedir}/setuptools/*.exe
+%{__rm} -r $RPM_BUILD_ROOT%{pypy_sitedir}/setuptools/tests
 mv $RPM_BUILD_ROOT%{pypy_libdir}/bin/easy_install $RPM_BUILD_ROOT%{_bindir}/easy_install-pypy-%{pypy_ver}
-rm $RPM_BUILD_ROOT%{pypy_libdir}/bin/easy_install*
 %endif
 
 %clean
@@ -161,16 +181,16 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/easy_install-2.*
 %{py_sitescriptdir}/distribute-%{version}-py*.egg-info
-%{py_sitescriptdir}/Setuptools-*.egg-info
-%dir %{py_sitescriptdir}/setuptools
-%dir %{py_sitescriptdir}/setuptools/command
-%{py_sitescriptdir}/site.py
-%{py_sitescriptdir}/setuptools.pth
-%{py_sitescriptdir}/pkg_resources.py[co]
+%{py_sitescriptdir}/Setuptools-0.6c11-py*.egg-info
 %{py_sitescriptdir}/easy_install.py[co]
+%{py_sitescriptdir}/pkg_resources.py[co]
+%{py_sitescriptdir}/site.py
 %{py_sitescriptdir}/site.py[co]
+%dir %{py_sitescriptdir}/setuptools
 %{py_sitescriptdir}/setuptools/*.py[co]
+%dir %{py_sitescriptdir}/setuptools/command
 %{py_sitescriptdir}/setuptools/command/*.py[co]
+%{py_sitescriptdir}/setuptools.pth
 %endif
 
 %if %{with python3}
@@ -178,23 +198,22 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/easy_install-3.*
 %{py3_sitescriptdir}/distribute-%{version}-py*.egg-info
-%{py3_sitescriptdir}/setuptools-*.egg-info
-%dir %{py3_sitescriptdir}/setuptools
-%dir %{py3_sitescriptdir}/setuptools/command
-%{py3_sitescriptdir}/site.py
-%{py3_sitescriptdir}/setuptools.pth
-%dir %{py3_sitescriptdir}/__pycache__
-%{py3_sitescriptdir}/pkg_resources.py
-%{py3_sitescriptdir}/__pycache__/pkg_resources.*.py[co]
+%{py3_sitescriptdir}/setuptools-0.6c11-py*.egg-info
 %{py3_sitescriptdir}/easy_install.py
+%{py3_sitescriptdir}/pkg_resources.py
+%{py3_sitescriptdir}/site.py
 %{py3_sitescriptdir}/__pycache__/easy_install.*.py[co]
+%{py3_sitescriptdir}/__pycache__/pkg_resources.*.py[co]
 %{py3_sitescriptdir}/__pycache__/site.*.py[co]
-%dir %{py3_sitescriptdir}/setuptools/__pycache__
+%dir %{py3_sitescriptdir}/setuptools
 %{py3_sitescriptdir}/setuptools/*.py
+%dir %{py3_sitescriptdir}/setuptools/__pycache__
 %{py3_sitescriptdir}/setuptools/__pycache__/*.py[co]
-%dir %{py3_sitescriptdir}/setuptools/command/__pycache__
+%dir %{py3_sitescriptdir}/setuptools/command
 %{py3_sitescriptdir}/setuptools/command/*.py
-%{py3_sitescriptdir}/setuptools/command/__py[co]ache__/*.py[co]
+%dir %{py3_sitescriptdir}/setuptools/command/__pycache__
+%{py3_sitescriptdir}/setuptools/command/__pycache__/*.py[co]
+%{py3_sitescriptdir}/setuptools.pth
 %endif
 
 %if %{with pypy}
@@ -202,13 +221,13 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/easy_install-pypy*
 %{pypy_sitedir}/distribute-%{version}-py*.egg-info
-%{pypy_sitedir}/setuptools-*.egg-info
-%dir %{pypy_sitedir}/setuptools
-%dir %{pypy_sitedir}/setuptools/command
-%{pypy_sitedir}/site.py*
-%{pypy_sitedir}/setuptools.pth
-%{pypy_sitedir}/pkg_resources.py*
+%{pypy_sitedir}/setuptools-0.6c11-py*.egg-info
 %{pypy_sitedir}/easy_install.py*
+%{pypy_sitedir}/site.py*
+%{pypy_sitedir}/pkg_resources.py*
+%dir %{pypy_sitedir}/setuptools
 %{pypy_sitedir}/setuptools/*.py*
+%dir %{pypy_sitedir}/setuptools/command
 %{pypy_sitedir}/setuptools/command/*.py*
+%{pypy_sitedir}/setuptools.pth
 %endif
