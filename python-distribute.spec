@@ -167,10 +167,10 @@ mv $RPM_BUILD_ROOT%{py_sitescriptdir}/$egg $RPM_BUILD_ROOT%{py_sitescriptdir}/S$
 	--root=$RPM_BUILD_ROOT \
 	--optimize=1
 
+mv $RPM_BUILD_ROOT%{pypy_libdir}/bin/easy_install $RPM_BUILD_ROOT%{_bindir}/easy_install-pypy-%{pypy_ver}
 %{__rm} $RPM_BUILD_ROOT%{pypy_libdir}/bin/easy_install*
 %{__rm} $RPM_BUILD_ROOT%{pypy_sitedir}/setuptools/*.exe
 %{__rm} -r $RPM_BUILD_ROOT%{pypy_sitedir}/setuptools/tests
-mv $RPM_BUILD_ROOT%{pypy_libdir}/bin/easy_install $RPM_BUILD_ROOT%{_bindir}/easy_install-pypy-%{pypy_ver}
 %endif
 
 %clean
