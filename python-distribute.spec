@@ -20,12 +20,12 @@
 Summary:	Easily download, build, install, upgrade, and uninstall Python packages
 Summary(pl.UTF-8):	Łatwe ściąganie, budowanie, instalowanie, uaktualnianie i usuwanie pakietów Pythona
 Name:		python-distribute
-Version:	0.6.28
-Release:	2
+Version:	0.6.34
+Release:	1
 License:	PSF or ZPL
 Group:		Development/Languages/Python
 Source0:	http://pypi.python.org/packages/source/d/distribute/distribute-%{version}.tar.gz
-# Source0-md5:	b400b532e33f78551e6847c1f5965e56
+# Source0-md5:	4576ab843a6db5100fb22a72deadf56d
 URL:		http://pypi.python.org/pypi/distribute
 %if %{with python2}
 BuildRequires:	python
@@ -186,6 +186,8 @@ rm -rf $RPM_BUILD_ROOT
 %{py_sitescriptdir}/pkg_resources.py[co]
 %{py_sitescriptdir}/site.py
 %{py_sitescriptdir}/site.py[co]
+%dir %{py_sitescriptdir}/_markerlib
+%{py_sitescriptdir}/_markerlib/*.py[co]
 %dir %{py_sitescriptdir}/setuptools
 %{py_sitescriptdir}/setuptools/*.py[co]
 %dir %{py_sitescriptdir}/setuptools/command
@@ -205,6 +207,10 @@ rm -rf $RPM_BUILD_ROOT
 %{py3_sitescriptdir}/__pycache__/easy_install.*.py[co]
 %{py3_sitescriptdir}/__pycache__/pkg_resources.*.py[co]
 %{py3_sitescriptdir}/__pycache__/site.*.py[co]
+%dir %{py3_sitescriptdir}/_markerlib
+%{py3_sitescriptdir}/_markerlib/*.py
+%dir %{py3_sitescriptdir}/_markerlib/__pycache__
+%{py3_sitescriptdir}/_markerlib/__pycache__/*.py[co]
 %dir %{py3_sitescriptdir}/setuptools
 %{py3_sitescriptdir}/setuptools/*.py
 %dir %{py3_sitescriptdir}/setuptools/__pycache__
@@ -225,6 +231,8 @@ rm -rf $RPM_BUILD_ROOT
 %{pypy_sitedir}/easy_install.py*
 %{pypy_sitedir}/site.py*
 %{pypy_sitedir}/pkg_resources.py*
+%dir %{pypy_sitedir}/_markerlib
+%{pypy_sitedir}/_markerlib/*.py*
 %dir %{pypy_sitedir}/setuptools
 %{pypy_sitedir}/setuptools/*.py*
 %dir %{pypy_sitedir}/setuptools/command
