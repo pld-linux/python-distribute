@@ -21,7 +21,7 @@ Summary:	Easily download, build, install, upgrade, and uninstall Python packages
 Summary(pl.UTF-8):	Łatwe ściąganie, budowanie, instalowanie, uaktualnianie i usuwanie pakietów Pythona
 Name:		python-distribute
 Version:	0.6.35
-Release:	1
+Release:	2
 License:	PSF or ZPL
 Group:		Development/Languages/Python
 Source0:	http://pypi.python.org/packages/source/d/distribute/distribute-%{version}.tar.gz
@@ -64,6 +64,7 @@ pracy z dystrybucjami modułów Pythona.
 Summary:	Easily download, build, install, upgrade, and uninstall Python 3.x packages
 Summary(pl.UTF-8):	Łatwe ściąganie, budowanie, instalowanie, uaktualnianie i usuwanie pakietów Pythona 3.x
 Group:		Development/Languages/Python
+Provides:	python3-setuptools = 1:0.6-3
 
 %description -n python3-%{pname}
 Distribute is a fork of the Setuptools project.
