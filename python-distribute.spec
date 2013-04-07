@@ -20,12 +20,12 @@
 Summary:	Easily download, build, install, upgrade, and uninstall Python packages
 Summary(pl.UTF-8):	Łatwe ściąganie, budowanie, instalowanie, uaktualnianie i usuwanie pakietów Pythona
 Name:		python-distribute
-Version:	0.6.35
-Release:	2
+Version:	0.6.36
+Release:	1
 License:	PSF or ZPL
 Group:		Development/Languages/Python
 Source0:	http://pypi.python.org/packages/source/d/distribute/distribute-%{version}.tar.gz
-# Source0-md5:	e55298c7e3a233df1a47a4881a0c9800
+# Source0-md5:	a923385de72dcdca68cd4ac2b9dc1148
 URL:		http://pypi.python.org/pypi/distribute
 %if %{with python2}
 BuildRequires:	python
