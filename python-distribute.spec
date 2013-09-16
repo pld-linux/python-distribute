@@ -21,7 +21,7 @@ Summary:	Easily download, build, install, upgrade, and uninstall Python packages
 Summary(pl.UTF-8):	Łatwe ściąganie, budowanie, instalowanie, uaktualnianie i usuwanie pakietów Pythona
 Name:		python-distribute
 Version:	0.6.36
-Release:	2
+Release:	3
 License:	PSF or ZPL
 Group:		Development/Languages/Python
 Source0:	http://pypi.python.org/packages/source/d/distribute/distribute-%{version}.tar.gz
@@ -44,6 +44,7 @@ BuildRequires:	pypy
 BuildRequires:	rpm >= 4.4.9-56
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.523
+Requires:	python-modules
 Provides:	python-setuptools = 1:0.6-3
 Obsoletes:	python-setuptools
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
