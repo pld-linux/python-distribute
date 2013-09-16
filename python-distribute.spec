@@ -21,7 +21,7 @@ Summary:	Easily download, build, install, upgrade, and uninstall Python packages
 Summary(pl.UTF-8):	Łatwe ściąganie, budowanie, instalowanie, uaktualnianie i usuwanie pakietów Pythona
 Name:		python-distribute
 Version:	0.6.36
-Release:	3
+Release:	4
 License:	PSF or ZPL
 Group:		Development/Languages/Python
 Source0:	http://pypi.python.org/packages/source/d/distribute/distribute-%{version}.tar.gz
@@ -143,7 +143,8 @@ rm -rf $RPM_BUILD_ROOT
 %{__rm} $RPM_BUILD_ROOT%{py_sitescriptdir}/setuptools/*.exe
 %{__rm} -r $RPM_BUILD_ROOT%{py_sitescriptdir}/setuptools/tests
 # reinstall site.py deleted by py_postclean
-cp build-2/lib/site.py $RPM_BUILD_ROOT%{py_sitescriptdir}/site.py
+cp build-2/lib/site.py $RPM_BUILD_ROOT%{py_sitescriptdir}
+cp build-2/lib/setuptools/'script template'*.py $RPM_BUILD_ROOT%{py_sitescriptdir}/setuptools
 
 # rename to avoid rpm dir-to-file conflict from upgrade from python-setuptools
 egg=$(basename $RPM_BUILD_ROOT%{py_sitescriptdir}/setuptools-*.egg-info)
@@ -187,6 +188,7 @@ rm -rf $RPM_BUILD_ROOT
 %{py_sitescriptdir}/easy_install.py[co]
 %{py_sitescriptdir}/pkg_resources.py[co]
 %{py_sitescriptdir}/site.py
+%{py_sitescriptdir}/setuptools/script*template*.py
 %{py_sitescriptdir}/site.py[co]
 %dir %{py_sitescriptdir}/_markerlib
 %{py_sitescriptdir}/_markerlib/*.py[co]
