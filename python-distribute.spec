@@ -20,13 +20,13 @@
 Summary:	Easily download, build, install, upgrade, and uninstall Python packages
 Summary(pl.UTF-8):	Łatwe ściąganie, budowanie, instalowanie, uaktualnianie i usuwanie pakietów Pythona
 Name:		python-distribute
-Version:	0.6.36
-Release:	5
+Version:	0.6.49
+Release:	1
 License:	PSF or ZPL
 Group:		Development/Languages/Python
-Source0:	http://pypi.python.org/packages/source/d/distribute/distribute-%{version}.tar.gz
-# Source0-md5:	a923385de72dcdca68cd4ac2b9dc1148
-URL:		http://pypi.python.org/pypi/distribute
+Source0:	https://pypi.python.org/packages/source/d/distribute/distribute-%{version}.tar.gz
+# Source0-md5:	89e68df89faf1966bcbd99a0033fbf8e
+URL:		https://pypi.python.org/pypi/distribute
 %if %{with python2}
 BuildRequires:	python
 BuildRequires:	python-devel
@@ -142,8 +142,8 @@ rm -rf $RPM_BUILD_ROOT
 %{__rm} $RPM_BUILD_ROOT%{_bindir}/easy_install
 %{__rm} $RPM_BUILD_ROOT%{py_sitescriptdir}/setuptools/*.exe
 %{__rm} -r $RPM_BUILD_ROOT%{py_sitescriptdir}/setuptools/tests
-# reinstall site.py deleted by py_postclean
-cp build-2/lib/site.py $RPM_BUILD_ROOT%{py_sitescriptdir}
+# reinstall files deleted by py_postclean
+cp build-2/lib/setuptools/site-patch.py $RPM_BUILD_ROOT%{py_sitescriptdir}/setuptools
 cp build-2/lib/setuptools/'script template'*.py $RPM_BUILD_ROOT%{py_sitescriptdir}/setuptools
 
 # rename to avoid rpm dir-to-file conflict from upgrade from python-setuptools
@@ -187,15 +187,15 @@ rm -rf $RPM_BUILD_ROOT
 %{py_sitescriptdir}/Setuptools-0.6c11-py*.egg-info
 %{py_sitescriptdir}/easy_install.py[co]
 %{py_sitescriptdir}/pkg_resources.py[co]
-%{py_sitescriptdir}/site.py
-%{py_sitescriptdir}/setuptools/script*template*.py
-%{py_sitescriptdir}/site.py[co]
 %dir %{py_sitescriptdir}/_markerlib
 %{py_sitescriptdir}/_markerlib/*.py[co]
 %dir %{py_sitescriptdir}/setuptools
 %{py_sitescriptdir}/setuptools/*.py[co]
+%{py_sitescriptdir}/setuptools/script*template*.py
+%{py_sitescriptdir}/setuptools/site-patch.py
 %dir %{py_sitescriptdir}/setuptools/command
 %{py_sitescriptdir}/setuptools/command/*.py[co]
+%{py_sitescriptdir}/setuptools/command/launcher*manifest.xml
 %{py_sitescriptdir}/setuptools.pth
 %endif
 
@@ -207,10 +207,8 @@ rm -rf $RPM_BUILD_ROOT
 %{py3_sitescriptdir}/setuptools-0.6c11-py*.egg-info
 %{py3_sitescriptdir}/easy_install.py
 %{py3_sitescriptdir}/pkg_resources.py
-%{py3_sitescriptdir}/site.py
 %{py3_sitescriptdir}/__pycache__/easy_install.*.py[co]
 %{py3_sitescriptdir}/__pycache__/pkg_resources.*.py[co]
-%{py3_sitescriptdir}/__pycache__/site.*.py[co]
 %dir %{py3_sitescriptdir}/_markerlib
 %{py3_sitescriptdir}/_markerlib/*.py
 %dir %{py3_sitescriptdir}/_markerlib/__pycache__
@@ -223,6 +221,7 @@ rm -rf $RPM_BUILD_ROOT
 %{py3_sitescriptdir}/setuptools/command/*.py
 %dir %{py3_sitescriptdir}/setuptools/command/__pycache__
 %{py3_sitescriptdir}/setuptools/command/__pycache__/*.py[co]
+%{py3_sitescriptdir}/setuptools/command/launcher*manifest.xml
 %{py3_sitescriptdir}/setuptools.pth
 %endif
 
@@ -233,7 +232,6 @@ rm -rf $RPM_BUILD_ROOT
 %{pypy_sitedir}/distribute-%{version}-py*.egg-info
 %{pypy_sitedir}/setuptools-0.6c11-py*.egg-info
 %{pypy_sitedir}/easy_install.py*
-%{pypy_sitedir}/site.py*
 %{pypy_sitedir}/pkg_resources.py*
 %dir %{pypy_sitedir}/_markerlib
 %{pypy_sitedir}/_markerlib/*.py*
@@ -241,5 +239,6 @@ rm -rf $RPM_BUILD_ROOT
 %{pypy_sitedir}/setuptools/*.py*
 %dir %{pypy_sitedir}/setuptools/command
 %{pypy_sitedir}/setuptools/command/*.py*
+%{pypy_sitedir}/setuptools/command/launcher*manifest.xml
 %{pypy_sitedir}/setuptools.pth
 %endif
