@@ -7,7 +7,7 @@
 %bcond_without	pypy	# PyPy module
 %else
 %bcond_without	python3	# CPython 3.x module
-%bcond_without	pypy	# PyPy module
+%bcond_with	pypy	# PyPy module
 %endif
 
 %define	__pypy	/usr/bin/pypy
