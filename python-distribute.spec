@@ -8,7 +8,7 @@ Summary:	distribute compatibility wrapper for setuptools
 Summary(pl.UTF-8):	Nakładka na python-setuptools zastępujące distribute
 Name:		python-distribute
 Version:	0.7.3
-Release:	8
+Release:	9
 License:	PSF or ZPL
 Group:		Development/Languages/Python
 Source0:	https://pypi.python.org/packages/source/d/distribute/distribute-%{version}.zip
