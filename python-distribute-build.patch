@@ -8,7 +8,7 @@ diff --git a/pkg_resources.py b/pkg_resources.py
 index 779bd367..7bb0bdb3 100644
 --- a/pkg_resources.py
 +++ b/pkg_resources.py
-@@ -69,9 +69,9 @@ from os.path import isdir, split
+@@ -64,9 +64,9 @@ from os.path import isdir, split
  
  # Avoid try/except due to potential problems with delayed import mechanisms.
  if sys.version_info >= (3, 3) and sys.implementation.name == "cpython":
@@ -20,7 +20,7 @@ index 779bd367..7bb0bdb3 100644
  
  try:
      import parser
-@@ -1720,8 +1720,8 @@ class DefaultProvider(EggProvider):
+@@ -1514,8 +1514,8 @@ class DefaultProvider(EggProvider):
  
  register_loader_type(type(None), DefaultProvider)
  
@@ -31,9 +31,9 @@ index 779bd367..7bb0bdb3 100644
  
  
  class EmptyProvider(NullProvider):
-@@ -2128,8 +2128,8 @@ def find_on_path(importer, path_item, only=False):
+@@ -2001,8 +2001,8 @@ def find_on_path(importer, path_item, on
                          break
- register_finder(pkgutil.ImpImporter, find_on_path)
+ register_finder(ImpWrapper,find_on_path)
  
 -if importlib_bootstrap is not None:
 -    register_finder(importlib_bootstrap.FileFinder, find_on_path)
@@ -42,9 +42,9 @@ index 779bd367..7bb0bdb3 100644
  
  _declare_state('dict', _namespace_handlers={})
  _declare_state('dict', _namespace_packages={})
-@@ -2237,8 +2237,8 @@ def file_ns_handler(importer, path_item, packageName, module):
- register_namespace_handler(pkgutil.ImpImporter, file_ns_handler)
- register_namespace_handler(zipimport.zipimporter, file_ns_handler)
+@@ -2103,8 +2103,8 @@ def file_ns_handler(importer, path_item,
+ register_namespace_handler(ImpWrapper,file_ns_handler)
+ register_namespace_handler(zipimport.zipimporter,file_ns_handler)
  
 -if importlib_bootstrap is not None:
 -    register_namespace_handler(importlib_bootstrap.FileFinder, file_ns_handler)
