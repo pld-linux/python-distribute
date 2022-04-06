@@ -1,14 +1,14 @@
 #
 # Conditional build:
 %bcond_without	python2	# CPython 2.x module
-%bcond_without	python3	# CPython 3.x module
+%bcond_with	python3	# CPython 3.x module
 
 %define		pname	distribute
 Summary:	distribute compatibility wrapper for setuptools
 Summary(pl.UTF-8):	Nakładka na python-setuptools zastępujące distribute
 Name:		python-distribute
 Version:	0.7.3
-Release:	13
+Release:	14
 License:	PSF or ZPL
 Group:		Development/Languages/Python
 Source0:	https://pypi.python.org/packages/source/d/distribute/distribute-%{version}.zip
