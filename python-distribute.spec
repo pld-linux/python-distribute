@@ -53,7 +53,7 @@ jest tylko nakładką na współczesne Setuptools.
 
 %prep
 %setup -q -n %{pname}-%{version}
-%patch0 -p1
+%patch -P0 -p1
 
 %build
 %if %{with python2}
